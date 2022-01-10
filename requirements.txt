@@ -9,3 +9,4 @@ python-jose
 aiofiles
 flask
 jinja2
+websockets
