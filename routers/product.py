@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Header, Cookie, Form
 from fastapi.responses import Response, HTMLResponse, PlainTextResponse
 from typing import Optional, List
+import time
 
 router = APIRouter(
     prefix='/product',
@@ -10,6 +11,9 @@ router = APIRouter(
 
 products = ['Watch', 'Camera', 'Phone']
 
+async def time_consuming_funcionality():  # Funcionalidade que precisa estar resolvida antes ou precisa de alguma resolução antes de ser rodada (async / await)
+    time.sleep(5)
+    return 'ok'
 
 @router.post('/new')
 def create_product(name: str = Form(...)):  #Importar: from fastapi import Form
@@ -18,7 +22,8 @@ def create_product(name: str = Form(...)):  #Importar: from fastapi import Form
 
 
 @router.get('/all')
-def get_all_products():
+async def get_all_products():
+    await time_consuming_funcionality()  # Funcionalidade que precisa estar resolvida antes ou precisa de alguma resolução antes de ser rodada (async / await)
     # return products
     data = " ".join(products)
     response = Response(content=data, media_type='text/plain')  # Importar: from fastapi.responses import Response
