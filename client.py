@@ -5,7 +5,7 @@ html = """
         <title>Chat</title>
     </head>
     <body>
-        <h1>WebSocket Chat</h1>
+        <h1>Vamos conversar?</h1>
         <form action="" onsubmit="sendMessage(event)">
             <input type="text" id="messageText" autocomplete="off"/>
             <button>Send</button>
