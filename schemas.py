@@ -48,6 +48,10 @@ class ArticleDisplay(BaseModel):
     content: str
     published: bool
     user: User
-
     class Config:
         orm_mode = True
+
+class ProductBase(BaseModel):
+    title: str
+    description: str
+    price: float

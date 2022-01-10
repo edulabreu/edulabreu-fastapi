@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from routers import blog_get, blog_post, article, product, user, file
 from auth import authentication
+from templates import templates
 from db import models
 from db.create_db import engine
 from fastapi.responses import JSONResponse, PlainTextResponse
@@ -22,8 +23,9 @@ app.include_router(product.router)  # Aqui importo (acesso) o arquivo python ond
 
 app.include_router(authentication.router)  # Aqui importo (acesso) o arquivo python onde ira autenticar os usuarios
 
-app.include_router(file.router) # Aqui importo (acesso) o arquivo python onde ira pegar/gravar os arquivos
+app.include_router(file.router)  # Aqui importo (acesso) o arquivo python onde ira pegar/gravar os arquivos
 
+app.include_router(templates.router)  # Aqui importo (acesso) o arquivo python onde ira pegar/gravar os arquivos de templates html/css
 
 app.mount('/files', StaticFiles(directory='files'), name='files')  # Permito acessar arquivos ( imagens, docs, txt etc...)  no projeto
 
@@ -46,3 +48,6 @@ def story_exception_handler(request: Request, exc: StoryException):
 
 
 models.Base.metadata.create_all(engine)  # importar o modulo models.py acima e o modulo create_db importar 'engine'
+
+app.mount('/files', StaticFiles(directory='files'), name='files')
+app.mount('/templates/static', StaticFiles(directory="templates/static"), name="static")
